@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 import roslib
 roslib.load_manifest('nav_cloning')
@@ -16,13 +16,17 @@ from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from std_srvs.srv import Empty
 from std_srvs.srv import SetBool, SetBoolResponse
+from gazebo_msgs.srv import DeleteModel #add
 import csv
 import os
 import time
 import copy
 import sys
 import tf
+import subprocess
 from nav_msgs.msg import Odometry
+from std_msgs.msg import Int32
+
 
 class nav_cloning_node:
     def __init__(self):
@@ -42,6 +46,9 @@ class nav_cloning_node:
         self.path_sub = rospy.Subscriber("/move_base/NavfnROS/plan", Path, self.callback_path)
         self.min_distance = 0.0
         self.action = 0.0
+        #add
+        self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
+        #end
         self.episode = 0
         self.vel = Twist()
         self.path_pose = PoseArray()
@@ -140,13 +147,44 @@ class nav_cloning_node:
         imgobj_right = np.asanyarray([r,g,b])
 
         ros_time = str(rospy.Time.now())
-
-        if self.episode == 4000:
+        
+        #if self.episode == 100:
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model_only.py'
+            #subprocess.run(['python3', spawn_model_script_path])
+        
+        #if self.episode == 3600:
+        if self.episode == 6300:
             self.learning = False
             self.dl.save(self.save_path)
             #self.dl.load(self.load_path)
+            
+        #if self.episode == 6400:
+            #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
+            #subprocess.run(['python3', delete_model_script_path])
+               
 
-        if self.episode == 6000:
+        
+        #新しくモデルを生成する条件
+        #if (self.episode - 100) % 1600 == 0 and self.episode > 50 and self.episode <= 3320:
+        #if self.episode == 6420:
+            #move_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/moving_color_date.py'#変更点
+            #subprocess.run(['python3', move_model_script_path])
+            
+            #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {move_model_script_path}'], shell=False)#add
+#end
+
+           
+        #if self.episode == 3350:
+            #move_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/move_model2.py'
+            #subprocess.run(['python3', move_model_script_path])
+        #end
+        
+        
+                        
+
+        #if self.episode == 6000:
+        if self.episode == 8300:
+            #os.system('pkill -f moving_color_date.py')
             os.system('killall roslaunch')
             sys.exit()
 
@@ -258,3 +296,5 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         rg.loop()
         r.sleep()
+
+

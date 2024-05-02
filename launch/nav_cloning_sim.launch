@@ -4,12 +4,12 @@
   <arg name="mode" default="use_dl_output"/>
   <arg name="world_name" default="willow_garage.world"/>
   <arg name="map_file" default="willowgarage.yaml"/>
-  <arg name="waypoints_file" default="willow_loop.yaml"/>
+  <arg name="waypoints_file" default="willow_loop_waypoint_nav.yaml"/>
   <arg name="dist_err" default="0.8"/>
   <arg name="initial_pose_x" default="-10.78" />
   <arg name="initial_pose_y" default="-16.78" />
   <arg name="initial_pose_a" default="0.0" />
-  <arg name="use_waypoint_nav" default="false" />
+  <arg name="use_waypoint_nav" default="true" />
   <arg name="use_initpose" default="false" />
   <arg name="robot_x" default="0.0" />
   <arg name="robot_y" default="0.0" />
