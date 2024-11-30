@@ -2,14 +2,16 @@
 <launch>
   <arg name="script" default="nav_cloning_node.py"/>
   <arg name="mode" default="use_dl_output"/>
-  <arg name="world_name" default="willow_garage.world"/>
+  <!--<arg name="world_name" default="willow_garage.world"/>-->
+  <!--<arg name="world_name" default="2willow_garage.world"/>-->
+  <arg name="world_name" default="willow_garage_number2.world"/>
   <arg name="map_file" default="willowgarage.yaml"/>
-  <arg name="waypoints_file" default="willow_loop.yaml"/>
+  <arg name="waypoints_file" default="willow_loop_waypoint_nav.yaml"/>
   <arg name="dist_err" default="0.8"/>
   <arg name="initial_pose_x" default="-10.78" />
   <arg name="initial_pose_y" default="-16.78" />
   <arg name="initial_pose_a" default="0.0" />
-  <arg name="use_waypoint_nav" default="false" />
+  <arg name="use_waypoint_nav" default="true" />
   <arg name="use_initpose" default="false" />
   <arg name="robot_x" default="0.0" />
   <arg name="robot_y" default="0.0" />
@@ -28,7 +30,6 @@
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
 
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model mobile_base -x $(arg robot_x) -y $(arg robot_y) -z 0.0 -Y $(arg robot_Y) -param robot_description" />
-
   <group if="$(arg use_initpose)">
     <node pkg="nav_cloning" type="initpose" name="initpose"/>
   </group>
@@ -46,4 +47,9 @@
         args="20 nav_cloning start_wp_nav.launch"
         name="timed_roslaunch3" >
   </node>
+  <!--ここから人を追加するプログラム -->
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find nav_cloning)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find nav_cloning)/models"/>
+  <!--ここまで -->
+
 </launch>

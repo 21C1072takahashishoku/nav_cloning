@@ -1,0 +1,41 @@
+<sdf version="1.4">
+<model name="colorfull_box">
+  <pose>0 0 1 0 0 0</pose>
+    <link name="link">
+      <inertial>
+        <mass>1.0</mass>
+        <inertia>
+          <ixx>0.083</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.083</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.083</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>1 1 1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>1 1 1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>/home/ciero/catkin_ws/src/nav_cloning/models/changing_model/models/colorfull_box/materials/scripts/colorfull_box.material</uri>
+            <name>colorfull_boxTexture</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+      <plugin name="texture_changer" filename="libtexture_change_plugin.so">
+      </plugin>
+
+  </model>
+</sdf>

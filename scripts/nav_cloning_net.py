@@ -102,5 +102,7 @@ class deep_learning:
     def load(self, load_path):
         chainer.serializers.load_npz(load_path , self.net)
 
-if __name__ == '__main__':
+    if __name__ == '__main__':
         dl = deep_learning()
+
+

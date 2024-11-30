@@ -1,5 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
+
+from numpy import dtype#githubのやつにあったが、今までの自分にはなかった
 import roslib
 roslib.load_manifest('nav_cloning')
 import rospy
@@ -16,13 +18,17 @@ from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from std_srvs.srv import Empty
 from std_srvs.srv import SetBool, SetBoolResponse
+from gazebo_msgs.srv import DeleteModel #追加。特定のモデルの削除ができる
 import csv
 import os
 import time
 import copy
 import sys
 import tf
+import subprocess#追加した。サブプロセスを起動するため
 from nav_msgs.msg import Odometry
+from std_msgs.msg import Int32
+
 
 class nav_cloning_node:
     def __init__(self):
@@ -42,6 +48,9 @@ class nav_cloning_node:
         self.path_sub = rospy.Subscriber("/move_base/NavfnROS/plan", Path, self.callback_path)
         self.min_distance = 0.0
         self.action = 0.0
+        #add
+        #self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
+        #end
         self.episode = 0
         self.vel = Twist()
         self.path_pose = PoseArray()
@@ -51,7 +60,9 @@ class nav_cloning_node:
         self.learning = True
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
-        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_'+str(self.mode)+'/'
+        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/卒論データ/step8500/willow_garage/青廊下＆赤ガレージ/障害物配置/衝突テスト/0,0,1/'
+        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/vel_0.2&duration_0.2/step6000/無配置/確認/黄色/'
+        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_'+str(self.mode)+'/'#記録場所の指定
         self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_'+str(self.mode)+'/'
         self.previous_reset_time = 0
         self.pos_x = 0.0
@@ -61,7 +72,7 @@ class nav_cloning_node:
         self.start_time_s = rospy.get_time()
         os.makedirs(self.path + self.start_time)
 
-        with open(self.path + self.start_time + '/' +  'training.csv', 'w') as f:
+        with open(self.path + self.start_time + '/' +  'training.csv', 'w') as f:#ｃｓｖファイルの中の一番上の場所の名前変更
             writer = csv.writer(f, lineterminator='\n')
             writer.writerow(['step', 'mode', 'loss', 'angle_error(rad)', 'distance(m)','x(m)','y(m)', 'the(rad)'])
         self.tracker_sub = rospy.Subscriber("/tracker", Odometry, self.callback_tracker)
@@ -115,6 +126,8 @@ class nav_cloning_node:
         resp.message = "Training: " + str(self.learning)
         resp.success = True
         return resp
+       
+
 
     def loop(self):
         if self.cv_image.size != 640 * 480 * 3:
@@ -140,13 +153,50 @@ class nav_cloning_node:
         imgobj_right = np.asanyarray([r,g,b])
 
         ros_time = str(rospy.Time.now())
+        
 
-        if self.episode == 4000:
+        #if (self.episode ==200):
+        #if (self.episode % 1200 == 0 and self.episode <=3700) or (self.episode == 200):
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model.py'
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/random_change_shape.py'
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/random_change_color.py'
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/random_change_color_shape.py'
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/random_change_size.py'
+            #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
+            #subprocess.run(['python3', delete_model_script_path])
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/random_spawn_model.py'
+            #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {spawn_model_script_path }'], shell=False)#別のターミナルで実行する
+            
+        #if (self.episode ==3900):
+            #os.system('pkill -f spawn_model.py')#spawnスクリプト解除
+            #os.system('pkill -f random_change_shape.py')#shapeスクリプト解除
+            #os.system('pkill -f random_change_color.py')#colorスクリプト解除
+            #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
+            #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {delete_model_script_path }'], shell=False)#別のターミナルで実行する
+        
+        if self.episode == 6000:
+        #if self.episode == 8000:
+        #if self.episode == 3750:#３週と障害物配置部屋の直前
+        #if self.episode == 2666:#durationを0.3にしたときの同じ距離進むステップ数(0.2に対して）
             self.learning = False
             self.dl.save(self.save_path)
-            #self.dl.load(self.load_path)
+            
+            #使うプログラムによって有効化する
+            #os.system('pkill -f random_change_shape.py')           
+            #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
+            #subprocess.run(['python3', delete_model_script_path])
+        #if self.episode == 6050:
+        #    spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model.py'
+        #   subprocess.run(['python3', spawn_model_script_path])
 
-        if self.episode == 6000:
+        
+                        
+
+        #if self.episode == 5400:#１周してスタート位置らへんまで戻るまで
+        #if self.episode == 4000:#durationを0.3にしたときの同じ距離進むステップ数(0.2に対して）
+        if self.episode == 8500:#duration２倍にしたから
+        #if self.episode == 10000:
+            #os.system('pkill -f random_change_color.py')
             os.system('killall roslaunch')
             sys.exit()
 
@@ -221,10 +271,15 @@ class nav_cloning_node:
             print(str(self.episode) + ", training, loss: " + str(loss) + ", angle_error: " + str(angle_error) + ", distance: " + str(distance))
             self.episode += 1
             line = [str(self.episode), "training", str(loss), str(angle_error), str(distance), str(self.pos_x), str(self.pos_y), str(self.pos_the)]
-            with open(self.path + self.start_time + '/' + 'training.csv', 'a') as f:
+            with open(self.path + self.start_time + '/' + 'training.csv', 'a') as f:#学習時のデータ保存場所の指定
                 writer = csv.writer(f, lineterminator='\n')
                 writer.writerow(line)
-            self.vel.linear.x = 0.2
+
+            
+            self.vel.linear.x = 0.2#元の速度
+            #self.vel.linear.x = 0.25#duration0.6で速度0.2に対する0.4の速度(0.3だと学習時に衝突することがある。）
+            #self.vel.linear.x = 0.1 #duration 0.4
+            #self.vel.linear.x = 0.4
             self.vel.angular.z = target_action
             self.nav_pub.publish(self.vel)
 
@@ -236,10 +291,13 @@ class nav_cloning_node:
             self.episode += 1
             angle_error = abs(self.action - target_action)
             line = [str(self.episode), "test", "0", str(angle_error), str(distance), str(self.pos_x), str(self.pos_y), str(self.pos_the)]
-            with open(self.path + self.start_time + '/' + 'training.csv', 'a') as f:
+            with open(self.path + self.start_time + '/' + 'training.csv', 'a') as f:#テスト時のデータ保存場所の指定
                 writer = csv.writer(f, lineterminator='\n')
                 writer.writerow(line)
-            self.vel.linear.x = 0.2
+            self.vel.linear.x = 0.2#元の速度
+            #self.vel.linear.x = 0.3#duration0.6で速度0.2に対する0.4の速度
+            #self.vel.linear.x = 0.25#duration0.6で速度0.2に対する0.4の速度(0.3だと学習時に衝突することがある。）
+            #self.vel.linear.x = 0.1 #duration0.4
             self.vel.angular.z = target_action
             self.nav_pub.publish(self.vel)
 
@@ -253,8 +311,10 @@ class nav_cloning_node:
 
 if __name__ == '__main__':
     rg = nav_cloning_node()
-    DURATION = 0.2
+    DURATION = 0.2#もともと0.2だったが、0.4に上げたらCPU使用率が約半分ほどになった。
     r = rospy.Rate(1 / DURATION)
     while not rospy.is_shutdown():
         rg.loop()
         r.sleep()
+
+

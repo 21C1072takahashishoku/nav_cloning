@@ -1,0 +1,17 @@
+material colorfull_boxTexture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture /home/ciero/catkin_ws/src/nav_cloning/models/changing_model/models/colorfull_box/materials/scripts/my_textures/noise_image.png
+        
+        
+        scale 1 1
+      }
+    }
+  }
+}
+

@@ -1,0 +1,7 @@
+image: straight_road.png  # 実際の画像ファイル名に変更
+resolution: 0.02  # 1ピクセルのサイズに対するメートル数
+origin: [-10.0, -10.0, 0] 
+negate: 0  # 0なら黒が障害物、1なら白が障害物
+occupied_thresh: 0.65  # 障害物のしきい値
+free_thresh: 0.196  # 空間のしきい値
+

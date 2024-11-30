@@ -160,6 +160,88 @@
         <kinematic>0</kinematic>
       </link>
     </model>
+    
+    <!-- ここから人を追加するプログラム-->
+    <model name="actor1_collision_model">
+      <pose>0 0 0 0 0 0</pose>
+      <static>true</static>
+      <link name="link">
+        <collision name="link">
+          <pose>0 -0.18 0.00 1.57 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+        </collision>
+        <!-- <visual name="link">
+          <pose>0 -0.18 0.00 1.57 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.3</radius>
+              <length>1.8</length>
+            </cylinder>
+          </geometry>
+        </visual> -->
+      </link>
+    </model>
+ 
+    <actor name="actor1"> 
+        <!--1のときの部屋の中の値<pose>800 800 0 0 0 0</pose> <!-- 初期値を変更--> -->
+      <pose>485 485 0 0 0 0</pose>
+      <skin>
+        <filename>walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <scale>1.000000</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+ 
+      <plugin name="actor1_plugin" filename="libPedestrianSFMRandomPlugin.so">
+        <velocity>0.60</velocity><!--もともとは1だった-->
+        <radius>0.4</radius>
+        <animation_factor>5.1</animation_factor>
+        <people_distance>6.0</people_distance>
+        <!-- weights -->
+        <goal_weight>2.0</goal_weight>
+        <obstacle_weight>0.0</obstacle_weight> <!--10.0-->
+        <social_weight>15</social_weight> <!--2.1-->
+        <group_gaze_weight>3.0</group_gaze_weight>
+        <group_coh_weight>2.0</group_coh_weight>
+        <group_rep_weight>1.0</group_rep_weight>
+        <ignore_obstacles>
+          <model>ground_plane</model>
+          <model>actor1_collision_model</model>
+        </ignore_obstacles>
+        <trajectory>
+          <cyclic>true</cyclic>
+          <!--<waypoint> 21.5000 5.50000 0.5</waypoint>-->
+          <!--<waypoint>15.5000 11.50000 0.5</waypoint>-->
+          <waypoint>18.5000 8.50000 0.5</waypoint>
+
+
+        </trajectory>
+        <!-- <random_trajectory>
+          <steps>10</steps> -->
+          <!-- <seed>6723872</seed> -->
+          <!-- <origin>10.0 0.0 0.0</origin>
+          <rx>11.0</rx><ry>6.0</ry>
+        </random_trajectory> -->
+      </plugin>
+ 
+      <plugin name="attach_model1" filename="libAttachModelPlugin.so">
+        <link>
+          <link_name>actor1_pose</link_name>
+          <model>
+            <model_name>actor1_collision_model</model_name>
+          </model>
+        </link>
+      </plugin>
+    </actor>
+    <!-- ここまで-->
     <plugin filename="libcollision_map_creator.so" name="collision_map_creator"/>
   </world>
 </sdf>

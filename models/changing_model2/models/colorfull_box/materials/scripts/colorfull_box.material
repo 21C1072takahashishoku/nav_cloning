@@ -1,0 +1,14 @@
+material colorfull_boxTexture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture textures/my_texture.png
+        scale 1 1
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="washing-machine">
+    <!--static>true</static-->
+    <pose>0 0 0 0 0 0</pose>
+    <link name="base_link">
+      <inertial>
+        <mass>10.0</mass>
+        <inertia>
+          <ixx>1.000000</ixx>
+          <ixy>0.000000</ixy>
+          <ixz>0.000000</ixz>
+          <iyy>1.000000</iyy>
+          <iyz>0.000000</iyz>
+          <izz>1.000000</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://washing-machine/meshes/base_link.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual-gray-white">
+        <geometry>
+          <mesh>
+            <uri>model://washing-machine/meshes/base_link_gray-white.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>  0.95 0.95 0.95 1.0</ambient>
+          <diffuse>  0.95 0.95 0.95 1.0</diffuse>
+          <specular> 0.95 0.95 0.95 1.0</specular>
+        </material>
+      </visual>
+      <visual name="visual-light-gray">
+        <geometry>
+          <mesh>
+            <uri>model://washing-machine/meshes/base_link_light-gray.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>  0.80 0.80 0.80 1.0</ambient>
+          <diffuse>  0.80 0.80 0.80 1.0</diffuse>
+          <specular> 0.80 0.80 0.80 1.0</specular>
+        </material>
+      </visual>
+      <visual name="visual-dark-gray">
+        <geometry>
+          <mesh>
+            <uri>model://washing-machine/meshes/base_link_dark-gray.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>  0.45 0.45 0.45 1.0</ambient>
+          <diffuse>  0.45 0.45 0.45 1.0</diffuse>
+          <specular> 0.45 0.45 0.45 1.0</specular>
+        </material>
+      </visual>
+      <visual name="visual-blue-gray">
+        <geometry>
+          <mesh>
+            <uri>model://washing-machine/meshes/base_link_blue-gray.stl</uri>
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>  0.55 0.65 0.75 0.6</ambient>
+          <diffuse>  0.55 0.65 0.75 0.6</diffuse>
+          <specular> 0.55 0.65 0.75 0.6</specular>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
