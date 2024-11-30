@@ -19,11 +19,24 @@
       <pose>0 0 0 0 -0 0</pose>
       <visual name="visual">
         <geometry>
+<<<<<<< HEAD
           <cylinder><radius>1</radius><length>1</length></cylinder></geometry>
         <material>
           <ambient>0 0 1 1</ambient> 
           <diffuse>0 0 1 1</diffuse>
           <specular>0.1 0.1 0.1 1</specular>
+=======
+          <cylinder>
+            <radius>0.5</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/white</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
           <shader type="pixel" />
         </material>
         <pose>0 0 0 0 -0 0</pose>
@@ -35,7 +48,15 @@
         <max_contacts>10</max_contacts>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
+<<<<<<< HEAD
           <cylinder><radius>1</radius><length>1</length></cylinder></geometry>
+=======
+          <cylinder>
+            <radius>0.5</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
         <surface>
           <friction>
             <ode>
@@ -87,4 +108,7 @@
     <allow_auto_disable>1</allow_auto_disable>
   </model>
 </sdf>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a

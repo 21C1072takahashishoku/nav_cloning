@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 <sdf version="1.7">
   <model name="unit_cylinder_2">
     <link name="link">
+=======
+<?xml version='1.0'?>
+<sdf version='1.7'>
+  <model name='unit_cylinder_2'>
+    <link name='link'>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
       <inertial>
         <mass>1</mass>
         <inertia>
@@ -18,15 +25,23 @@
       <kinematic>0</kinematic>
       <pose>0 0 0 0 -0 0</pose>
       <gravity>1</gravity>
+<<<<<<< HEAD
       <visual name="visual">
         <geometry>
           <cylinder>
             <radius>0.5</radius>
+=======
+      <visual name='visual'>
+        <geometry>
+          <cylinder>
+            <radius>2</radius>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
             <length>1</length>
           </cylinder>
         </geometry>
         <material>
           <script>
+<<<<<<< HEAD
             <name>Gazebo/Gray</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
@@ -35,6 +50,16 @@
           </shader>
           <ambient>0.3 0.3 0.3 1</ambient>           
           <diffuse>0.7 0.7 0.7 1</diffuse> 
+=======
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+          <shader type='pixel'>
+            <normal_map>__default__</normal_map>
+          </shader>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.7 0.7 0.7 1</diffuse>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
           <specular>0.01 0.01 0.01 1</specular>
           <emissive>0 0 0 1</emissive>
         </material>
@@ -42,13 +67,21 @@
         <transparency>0</transparency>
         <cast_shadows>1</cast_shadows>
       </visual>
+<<<<<<< HEAD
       <collision name="collision">
+=======
+      <collision name='collision'>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
         <laser_retro>0</laser_retro>
         <max_contacts>10</max_contacts>
         <pose>0 0 0 0 -0 0</pose>
         <geometry>
           <cylinder>
+<<<<<<< HEAD
             <radius>0.5</radius>
+=======
+            <radius>2</radius>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
             <length>1</length>
           </cylinder>
         </geometry>

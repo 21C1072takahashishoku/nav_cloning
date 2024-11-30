@@ -46,4 +46,8 @@
         args="20 nav_cloning start_wp_nav.launch"
         name="timed_roslaunch3" >
   </node>
+<<<<<<< HEAD
 </launch>
+=======
+</launch>
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a

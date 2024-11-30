@@ -28,12 +28,20 @@ def draw_training_pos():
     rect_red = Rectangle((16.5, 6.5), 4, 4, linewidth=2, edgecolor='red', facecolor='none')
     rect_blue = Rectangle((17.5, 7.5), 2, 2, linewidth=2, edgecolor='blue', facecolor='none')
     rect_grey = Rectangle((15.5, 5.5), 6, 6, linewidth=2, edgecolor='grey', facecolor='none')
+<<<<<<< HEAD
     #rect_green = Rectangle((14.5, 4.5), 8, 8, linewidth=2, edgecolor='green', facecolor='none')
+=======
+    rect_green = Rectangle((14.5, 4.5), 8, 8, linewidth=2, edgecolor='green', facecolor='none')
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 
     ax.add_patch(rect_red)
     ax.add_patch(rect_blue)
     ax.add_patch(rect_grey)
+<<<<<<< HEAD
     #ax.add_patch(rect_green)
+=======
+    ax.add_patch(rect_green)
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 
     ax.set_xlim([-5, 30])
     ax.set_ylim([-5, 15])

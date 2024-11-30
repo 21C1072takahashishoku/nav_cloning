@@ -18,14 +18,22 @@ from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from std_srvs.srv import Empty
 from std_srvs.srv import SetBool, SetBoolResponse
+<<<<<<< HEAD
 from gazebo_msgs.srv import DeleteModel #追加。特定のモデルの削除ができる
+=======
+from gazebo_msgs.srv import DeleteModel #add
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 import csv
 import os
 import time
 import copy
 import sys
 import tf
+<<<<<<< HEAD
 import subprocess#追加した。サブプロセスを起動するため
+=======
+import subprocess
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 from nav_msgs.msg import Odometry
 from std_msgs.msg import Int32
 
@@ -49,7 +57,11 @@ class nav_cloning_node:
         self.min_distance = 0.0
         self.action = 0.0
         #add
+<<<<<<< HEAD
         #self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
+=======
+        self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
         #end
         self.episode = 0
         self.vel = Twist()
@@ -154,6 +166,7 @@ class nav_cloning_node:
 
         ros_time = str(rospy.Time.now())
         
+<<<<<<< HEAD
 
         #if (self.episode ==200):
         #if (self.episode % 1200 == 0 and self.episode <=3700) or (self.episode == 200):
@@ -197,6 +210,45 @@ class nav_cloning_node:
         if self.episode == 8500:#duration２倍にしたから
         #if self.episode == 10000:
             #os.system('pkill -f random_change_color.py')
+=======
+        #if self.episode == 100:
+            #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model_only.py'
+            #subprocess.run(['python3', spawn_model_script_path])
+        
+        #if self.episode == 3600:
+        if self.episode == 6300:
+            self.learning = False
+            self.dl.save(self.save_path)
+            #self.dl.load(self.load_path)
+            
+        #if self.episode == 6400:
+            #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
+            #subprocess.run(['python3', delete_model_script_path])
+               
+
+        
+        #新しくモデルを生成する条件
+        #if (self.episode - 100) % 1600 == 0 and self.episode > 50 and self.episode <= 3320:
+        #if self.episode == 6420:
+            #move_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/moving_color_date.py'#変更点
+            #subprocess.run(['python3', move_model_script_path])
+            
+            #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {move_model_script_path}'], shell=False)#add
+#end
+
+           
+        #if self.episode == 3350:
+            #move_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/move_model2.py'
+            #subprocess.run(['python3', move_model_script_path])
+        #end
+        
+        
+                        
+
+        #if self.episode == 6000:
+        if self.episode == 8300:
+            #os.system('pkill -f moving_color_date.py')
+>>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
             os.system('killall roslaunch')
             sys.exit()
 
