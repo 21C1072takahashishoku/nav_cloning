@@ -1,0 +1,70 @@
+<sdf version="1.7">
+  <model name="unit_cylinder">
+    <link name="link">
+      <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.145833</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.145833</iyy>
+          <iyz>0</iyz>
+          <izz>0.125</izz>
+        </inertia>
+        <pose>0 0 0 0 -0 0</pose>
+      </inertial>
+      <self_collide>false</self_collide>
+      <enable_wind>false</enable_wind>
+      <kinematic>false</kinematic>
+      <!-- Visual Section -->
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>1</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <!-- 環境光のみを使用し、拡散反射を最小限に -->
+          <ambient>1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>1 1 1 1</specular>
+          <emissive>1 1 1 1</emissive>
+        </material>
+        <pose>0 0 0 0 -0 0</pose>
+        <transparency>0</transparency>
+        <!-- 影の無効化 -->
+        <cast_shadows>false</cast_shadows>
+        <!-- シェーディングの設定追加 -->
+        <shader type='pixel'>
+          <normal_map>__default__</normal_map>
+        </shader>
+      </visual>
+      <!-- Collision Section -->
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>1</radius>
+            <length>1</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0</restitution_coefficient>
+            <threshold>1e+06</threshold>
+          </bounce>
+        </surface>
+      </collision>
+    </link>
+    <!-- Model Position -->
+    <pose>0 0 0 0 -0 0</pose>
+    <static>false</static>
+    <allow_auto_disable>true</allow_auto_disable>
+  </model>
+</sdf>

@@ -14,7 +14,7 @@ import os
 
 def draw_training_pos():
     rospy.init_node('draw_training_pos_node', anonymous=True)
-    path = '/home/ciero/catkin_ws/src/nav_cloning/data/卒論データ/step8500/willow_garage/青廊下＆赤ガレージ/障害物配置/1,1,0/'
+    path = '/home/ciel/catkin_ws/src/nav_cloning/data/卒論データ/step8500/willow_garage/白廊下＆黒ガレージ/1,1,1/'
     image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/map.png').convert("L")#willowgarage
     arr = np.asarray(image)
     fig = pyplot.figure()
@@ -32,9 +32,9 @@ def draw_training_pos():
                 str_step, str_mode, str_loss, str_angle_error, str_distance, str_x, str_y, str_the = row
                 x, y, the = float(str_x), float(str_y), float(str_the)
                 
-                if 6001 <= i <= 6001:
+                if 6000 <= i <= 6000:
                     patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
-                elif 6002 <= i <= 8499:
+                elif 6001 <= i <= 8499:
                     patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
                 elif 8500 <= i <= 8500:
                     patch = Circle(xy=(x, y), radius=0.1, facecolor="blue")

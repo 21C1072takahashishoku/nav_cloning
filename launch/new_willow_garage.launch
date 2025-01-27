@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="world_name" default="2willow_garage.world"/>
+  <arg name="world_name" default="2willow_garage.world"/><!--通常ガレージ-->
+  <!--<arg name="world_name" default="willow_garage_number.world"/>--><!--廊下のみ色変化-->
   <!--<arg name="world_name" default="Tsudanuma_2-3.world"/>-->
-  <!--<arg name="world_name" default="willow_garage_number2.world"/>-->
+  <!--<arg name="world_name" default="color_garage.world"/>-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find nav_cloning)/world/$(arg world_name)"/>
     <arg name="paused" value="false"/>

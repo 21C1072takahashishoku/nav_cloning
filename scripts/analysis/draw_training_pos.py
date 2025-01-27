@@ -31,32 +31,17 @@ def draw_training_pos():
                 continue
             str_step, str_mode, str_loss, str_angle_error, str_distance, str_x, str_y, str_the = row
             x, y, the = float(str_x), float(str_y), float(str_the)
-<<<<<<< HEAD
-            #if 1 <= i <= 2000:#duration２倍
-            #if 1 <= i <= 3700:
-            #if 1 <= i <= 6000:
-            #if 1 <= i <= 8000:
-                #patch = Circle(xy=(x, y), radius=0.03, facecolor="Gray")
-            #elif 3751 <= i <= 5400:
-            #elif 4001 <= i <= 6000:
-            #elif 2001 <= i <= 3000:#duration２倍
-            if 6001 <= i <= 6001:
-                patch = Circle(xy=(x, y), radius=0.3,facecolor="black")
-            elif 6002 <= i <= 8499:
+
+            if 1 <= i <= 6261:
+                patch = Circle(xy=(x, y), radius=0.03, facecolor="black")
+            elif 6262 <= i <= 8499:
                 patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
             elif 8500 <= i <= 8500:
-                patch = Circle(xy=(x, y), radius=0.1,facecolor="blue")
-=======
-            if 1 <= i <= 6300:
-                patch = Circle(xy=(x, y), radius=0.03, facecolor="gray")
-            elif 6301 <= i <= 8300:
-                patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
+                patch = Circle(xy=(x, y), radius=0.1, facecolor="blue")
             else:
                 continue
-            ax.add_patch(patch)
-            
-<<<<<<< HEAD
+            ax.add_patch(patch)   
+
     
     #関数を呼び出して円柱を出現させ
     cylinders_coordinates = [
@@ -67,62 +52,18 @@ def draw_training_pos():
     
     ax.set_xlim([-5, 30])#x軸の表示範囲
     ax.set_ylim([-5, 15])#y軸の表示範囲
+    #ax.set_xlim([-10, 55])#x軸(横軸)の表示範囲
+    #ax.set_ylim([-5, 45])#y軸(縦軸)の表示範囲
     #ax.set_xlim([-15, 50])  # x軸の表示範囲
     #ax.set_ylim([-15, 50])  # y軸の表示範囲
     pyplot.show()
 
 def draw_cylinders_at_coordinates(ax, coordinates_list):
      # 座標リストの各座標に赤色と青色の円柱を描画する関数
-     for (x, y), color in coordinates_list:
+    for (x, y), color in coordinates_list:
          cylinder_patch = Circle(xy=(x, y), radius=1,facecolor=color)
          ax.add_patch(cylinder_patch)
-=======
-    #with open(path + 'moving_obstacle_positions.csv', 'r') as f:
-        #is_first = True
-        #for i, roww in enumerate(csv.reader(f)):
-            #if is_first:
-                #is_first = False
-                #continue
-            #str_name, str_x, str_y, str_the = roww
-            #x, y, the = float(str_x), float(str_y), float(str_the)
-            #if 1 <= i <= 10:
-                #patch = Circle(xy=(x, y), radius=0.05, facecolor="red")
-            #elif 11 <= i <= 20:
-                #patch = Circle(xy=(x, y), radius=0.05, facecolor="green")
-            #elif 21 <= i <= 6300:
-                #patch = Circle(xy=(x, y), radius=0.03, facecolor="blue")
-            #elif 6301 <= i <= 8300:
-                #patch = Circle(xy=(x, y), radius=0.03, facecolor="blue")
-            #else:
-                #continue
-            #ax.add_patch(patch)
-    
-    #関数を呼び出して円柱を出現させ
-    cylinders_coordinates = [
-    #((19.3853439526047,8.23965340007451), "black"),
-    #((17.7710766419644,7.50739850419842), "black"),
-    #((15.3383801181823,10.3800556438597), "red"),
-    #((15.9015225307212,10.4149486906675), "red"),  
-    #((16.0876412455954,10.2426977136081), "red"),  
 
-
-
-    #テスト時
-    ((18.5, 8.5), "black"),
-    ]
-    #赤色と青色の円柱を描画する関数を呼び出します
-    draw_cylinders_at_coordinates(ax, cylinders_coordinates)
-    
-    ax.set_xlim([-5, 30])
-    ax.set_ylim([-5, 15])
-    pyplot.show()
-
-def draw_cylinders_at_coordinates(ax, coordinates_list):
-    # 座標リストの各座標に赤色と青色の円柱を描画する関数
-    for (x, y), color in coordinates_list:
-        cylinder_patch = Circle(xy=(x, y), radius=2,facecolor=color)
-        ax.add_patch(cylinder_patch)
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 
 if __name__ == '__main__':
     draw_training_pos()

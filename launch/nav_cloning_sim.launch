@@ -3,8 +3,9 @@
   <arg name="script" default="nav_cloning_node.py"/>
   <arg name="mode" default="use_dl_output"/>
   <!--<arg name="world_name" default="willow_garage.world"/>-->
-  <!--<arg name="world_name" default="2willow_garage.world"/>-->
-  <arg name="world_name" default="willow_garage_number2.world"/>
+  <arg name="world_name" default="2willow_garage.world"/><!--通常ガレージ-->
+  <!--<arg name="world_name" default="willow_garage_number.world"/>--><!--廊下のみ色変化-->
+  <!--<arg name="world_name" default="color_garage.world"/>-->
   <arg name="map_file" default="willowgarage.yaml"/>
   <arg name="waypoints_file" default="willow_loop_waypoint_nav.yaml"/>
   <arg name="dist_err" default="0.8"/>

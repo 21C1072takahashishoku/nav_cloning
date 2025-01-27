@@ -1,0 +1,16 @@
+material noise_world_texture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture /home/ciel/catkin_ws/src/nav_cloning/models/changing_world/noise_image.png
+        
+        
+        scale 1 1
+      }
+    }
+  }
+}

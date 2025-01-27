@@ -18,25 +18,19 @@ from nav_msgs.msg import Path
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from std_srvs.srv import Empty
 from std_srvs.srv import SetBool, SetBoolResponse
-<<<<<<< HEAD
 from gazebo_msgs.srv import DeleteModel #追加。特定のモデルの削除ができる
-=======
 from gazebo_msgs.srv import DeleteModel #add
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 import csv
 import os
 import time
 import copy
 import sys
 import tf
-<<<<<<< HEAD
 import subprocess#追加した。サブプロセスを起動するため
-=======
 import subprocess
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
 from nav_msgs.msg import Odometry
 from std_msgs.msg import Int32
-
+from datetime import datetime#追加した。日付を含めたファイルの作成のため
 
 class nav_cloning_node:
     def __init__(self):
@@ -57,11 +51,8 @@ class nav_cloning_node:
         self.min_distance = 0.0
         self.action = 0.0
         #add
-<<<<<<< HEAD
         #self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
-=======
         self.episode_pub = rospy.Publisher("/nav_cloning_node/episode", Int32, queue_size=1)
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
         #end
         self.episode = 0
         self.vel = Twist()
@@ -72,8 +63,9 @@ class nav_cloning_node:
         self.learning = True
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
-        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/卒論データ/step8500/willow_garage/青廊下＆赤ガレージ/障害物配置/衝突テスト/0,0,1/'
-        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/vel_0.2&duration_0.2/step6000/無配置/確認/黄色/'
+        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/noise_world/障害物配置/'
+        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/卒論データ/step8500/willow_garage/マゼンタ壁＆青ガレージ/障害物配置/自己発光/0,0,1/'
+        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/卒論データ/step8500/willow_garage/白廊下＆黒ガレージ/1,1,1/'
         #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_'+str(self.mode)+'/'#記録場所の指定
         self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_'+str(self.mode)+'/'
         self.previous_reset_time = 0
@@ -83,7 +75,24 @@ class nav_cloning_node:
         self.is_started = False
         self.start_time_s = rospy.get_time()
         os.makedirs(self.path + self.start_time)
-
+        # 現在の日時を取得してフォーマット
+        current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
+        # ファイル名に日時を埋め込む
+        self.output_dir = '/home/ciel/catkin_ws/src/nav_cloning/data/チャンネルファイル/通常ガレージ/'
+        self.output_file = os.path.join(self.output_dir, f"channel_means_{current_time}.csv")
+        # ディレクトリの存在確認と作成
+        os.makedirs(self.output_dir, exist_ok=True)
+        
+        #Initialize channel means CSV
+        with open(self.output_file, mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Step", "front_r_mean", "front_g_mean", "front_b_mean",  # Front
+                             "left_r_mean", "left_g_mean", "left_b_mean",  # Left
+                             "right_r_mean", "right_g_mean", "right_b_mean"  # Right
+                           ])
+        print(f"CSV file created: {self.output_file}")
+        
+        
         with open(self.path + self.start_time + '/' +  'training.csv', 'w') as f:#ｃｓｖファイルの中の一番上の場所の名前変更
             writer = csv.writer(f, lineterminator='\n')
             writer.writerow(['step', 'mode', 'loss', 'angle_error(rad)', 'distance(m)','x(m)','y(m)', 'the(rad)'])
@@ -155,18 +164,43 @@ class nav_cloning_node:
         img = resize(self.cv_image, (48, 64), mode='constant')
         r, g, b = cv2.split(img)
         imgobj = np.asanyarray([r,g,b])
+        
+        # Calculate channel means
+        front_r_mean = np.mean(imgobj[2])  # R channel mean
+        front_g_mean = np.mean(imgobj[1])  # G channel mean
+        front_b_mean = np.mean(imgobj[0])  # B channel mean
 
         img_left = resize(self.cv_left_image, (48, 64), mode='constant')
         r, g, b = cv2.split(img_left)
         imgobj_left = np.asanyarray([r,g,b])
+        
+        # Calculate channel means
+        left_r_mean = np.mean(imgobj_left[2])  # R channel mean
+        left_g_mean = np.mean(imgobj_left[1])  # G channel mean
+        left_b_mean = np.mean(imgobj_left[0])  # B channel mean
 
         img_right = resize(self.cv_right_image, (48, 64), mode='constant')
         r, g, b = cv2.split(img_right)
         imgobj_right = np.asanyarray([r,g,b])
 
+        # Calculate channel means
+        right_r_mean = np.mean(imgobj_right[2])  # R channel mean
+        right_g_mean = np.mean(imgobj_right[1])  # G channel mean
+        right_b_mean = np.mean(imgobj_right[0])  # B channel mean
+
+        # Save channel means to CSV
+        with open(self.output_file, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([
+                self.episode,
+                front_r_mean, front_g_mean, front_b_mean,  # Front
+                left_r_mean, left_g_mean, left_b_mean,  # Left
+                right_r_mean, right_g_mean, right_b_mean  # Right
+            ])
+            
         ros_time = str(rospy.Time.now())
         
-<<<<<<< HEAD
+
 
         #if (self.episode ==200):
         #if (self.episode % 1200 == 0 and self.episode <=3700) or (self.episode == 200):
@@ -187,7 +221,7 @@ class nav_cloning_node:
             #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
             #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {delete_model_script_path }'], shell=False)#別のターミナルで実行する
         
-        if self.episode == 6000:
+        if self.episode == 6262:
         #if self.episode == 8000:
         #if self.episode == 3750:#３週と障害物配置部屋の直前
         #if self.episode == 2666:#durationを0.3にしたときの同じ距離進むステップ数(0.2に対して）
@@ -198,27 +232,27 @@ class nav_cloning_node:
             #os.system('pkill -f random_change_shape.py')           
             #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
             #subprocess.run(['python3', delete_model_script_path])
-        #if self.episode == 6050:
-        #    spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model.py'
-        #   subprocess.run(['python3', spawn_model_script_path])
+        if self.episode == 6300:
+            spawn_model_script_path = '/home/ciel/catkin_ws/src/nav_cloning/model_script/my_cylinder/spawn_model.py'
+            subprocess.run(['python3', spawn_model_script_path])
 
         
                         
 
         #if self.episode == 5400:#１周してスタート位置らへんまで戻るまで
         #if self.episode == 4000:#durationを0.3にしたときの同じ距離進むステップ数(0.2に対して）
-        if self.episode == 8500:#duration２倍にしたから
+        #if self.episode == 8500:#duration２倍にしたから
         #if self.episode == 10000:
             #os.system('pkill -f random_change_color.py')
-=======
+
         #if self.episode == 100:
             #spawn_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/spawn_model_only.py'
             #subprocess.run(['python3', spawn_model_script_path])
         
         #if self.episode == 3600:
-        if self.episode == 6300:
-            self.learning = False
-            self.dl.save(self.save_path)
+        #if self.episode == 6300:
+            #self.learning = False
+            #self.dl.save(self.save_path)
             #self.dl.load(self.load_path)
             
         #if self.episode == 6400:
@@ -246,9 +280,9 @@ class nav_cloning_node:
                         
 
         #if self.episode == 6000:
-        if self.episode == 8300:
+        if self.episode == 8500:
             #os.system('pkill -f moving_color_date.py')
->>>>>>> 7708ec1d40aa1fa7033accb2c6659e4537e1d56a
+
             os.system('killall roslaunch')
             sys.exit()
 
@@ -353,12 +387,24 @@ class nav_cloning_node:
             self.vel.angular.z = target_action
             self.nav_pub.publish(self.vel)
 
-        temp = copy.deepcopy(img)
-        cv2.imshow("Resized Image", temp)
-        temp = copy.deepcopy(img_left)
-        cv2.imshow("Resized Left Image", temp)
-        temp = copy.deepcopy(img_right)
-        cv2.imshow("Resized Right Image", temp)
+        #temp = copy.deepcopy(img)
+        #cv2.imshow("Resized Image", temp)
+        #temp = copy.deepcopy(img_left)
+        #cv2.imshow("Resized Left Image", temp)
+        #temp = copy.deepcopy(img_right)
+        #cv2.imshow("Resized Right Image", temp)
+        #add
+        # 正面の画像をリサイズ
+        resized_img = cv2.resize(img, (128*2, 96*2))
+        cv2.imshow("Resized Image", resized_img)
+        # 左カメラの画像をリサイズ
+        resized_img_left = cv2.resize(img_left, (128*2, 96*2))
+        cv2.imshow("Resized Left Image", resized_img_left)
+        # 右カメラの画像をリサイズ
+        resized_img_right = cv2.resize(img_right, (128*2, 96*2))
+        cv2.imshow("Resized Right Image", resized_img_right)
+        #end
+
         cv2.waitKey(1)
 
 if __name__ == '__main__':
