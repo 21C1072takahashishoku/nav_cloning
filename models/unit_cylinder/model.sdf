@@ -26,8 +26,8 @@
           </cylinder>
         </geometry>
         <material>
-          <ambient>1 1 1 1</ambient> 
-          <diffuse>1 1 1 1</diffuse>
+          <ambient>1 0 1 1</ambient> 
+          <diffuse>1 0 1 1</diffuse>
           <specular>1 1 1 1</specular>
         </material>
         <pose>0 0 0 0 -0 0</pose>
