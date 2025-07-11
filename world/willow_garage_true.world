@@ -1,6 +1,6 @@
 <sdf version='1.6'>
   <world name='default'>
-      <gui fullscreen='0'>
+        <gui fullscreen='0'>
       <camera name='user_camera'>
         <pose frame=''>10.0 20.0 65.0 3.14159 1.57079 3.14159</pose>
         <view_controller>orbit</view_controller>
@@ -10,7 +10,7 @@
     </gui>
   
     <light name='sun' type='directional'>
-      <cast_shadows>0</cast_shadows>
+      <cast_shadows>1</cast_shadows>
       <pose frame=''>0 0 10 0 -0 0</pose>
       <diffuse>0.8 0.8 0.8 1</diffuse>
       <specular>0.2 0.2 0.2 1</specular>
@@ -22,7 +22,6 @@
       </attenuation>
       <direction>-0.5 0.1 -0.9</direction>
     </light>
-    
     <model name='ground_plane'>
       <static>1</static>
       <link name='link'>
@@ -51,7 +50,7 @@
           </surface>
           <max_contacts>10</max_contacts>
         </collision>
-
+<!--
         <visual name='visual'>
           <cast_shadows>0</cast_shadows>
           <geometry>
@@ -61,10 +60,13 @@
             </plane>
           </geometry>
           <material>
-            <ambient>0 0 0 1</ambient>  <!-- 赤 (R=1, G=0, B=0) -->
-            <diffuse>0 0 0 1</diffuse>  <!-- 赤 -->
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
           </material>
         </visual>
+-->
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>0</kinematic>
@@ -83,7 +85,7 @@
       <!--<background>0.7 0.7 0.7 1</background>--><!--もとの数値-->
       <ambient>1 1 1 1</ambient>
       <background>0.7 0.7 0.7 1</background>
-      <shadows>0</shadows>
+      <shadows>1</shadows>
     </scene>
     <audio>
       <device>default</device>
@@ -112,10 +114,10 @@
         </link>
       </model>
       <model name='willowgarage'>
-        <pose frame=''>-9.19148 -3.16955 -0.1 0 -0 0</pose>
+        <pose frame=''>-9.19148 -3.16955 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='walls'>
-          <pose frame=''>-9.19148 -3.16955 -0.1 0 -0 0</pose>
+          <pose frame=''>-9.19148 -3.16955 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -134,7 +136,7 @@
     </gui>
     <model name='willowgarage'>
       <static>1</static>
-      <pose frame=''>-9.19148 -3.16955 -0.1 0 -0 0</pose>
+      <pose frame=''>-9.19148 -3.16955 0 0 -0 0</pose>
       <link name='walls'>
         <collision name='collision'>
           <geometry>

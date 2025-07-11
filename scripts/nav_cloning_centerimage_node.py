@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from __future__ import print_function
-
 from numpy import dtype#githubのやつにあったが、今までの自分にはなかった
 import roslib
 roslib.load_manifest('nav_cloning')
@@ -63,8 +62,19 @@ class nav_cloning_node:
         self.learning = True
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
+        # 共通のベースパス
+        base_subpath = '6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
+	# 各ディレクトリ
+        self.path = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/', base_subpath) #ノーマルデータ
+        self.output_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/チャンネルファイル/', base_subpath) #チャンネルデータ
+    # カメラごとのディレクトリパスを作成
+        camera_base_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/カメラ画像', base_subpath)
+
+        self.front_dir = os.path.join(camera_base_dir, 'front')
+        self.left_dir = os.path.join(camera_base_dir, 'left')
+        self.right_dir = os.path.join(camera_base_dir, 'right')
         #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/修論データ/6262/環境光変化/1(投稿データ)/通常ガレージ/白ロボット/0,0,0/'
-        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/修論データ/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
+        #self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/修論データ/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0追実験2/'
         self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_'+str(self.mode)+'/'
         self.previous_reset_time = 0
         self.pos_x = 0.0
@@ -77,10 +87,17 @@ class nav_cloning_node:
         current_time = datetime.now().strftime("%Y-%m-%d_%H-%M")
         # ファイル名に日時を埋め込む
         #self.output_dir = '/home/ciel/catkin_ws/src/nav_cloning/data/tamesi/'
-        self.output_dir = '/home/ciel/catkin_ws/src/nav_cloning/data/修論データ/チャンネルファイル/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
         self.output_file = os.path.join(self.output_dir, f"channel_means_{current_time}.csv")
         # ディレクトリの存在確認と作成
         os.makedirs(self.output_dir, exist_ok=True)
+        
+        # ここに画像保存設定を追加
+        # 保存間隔の設定
+        self.save_interval = 100  # 100ステップごとに保存
+       
+        # ディレクトリ作成
+        for d in [self.front_dir, self.left_dir, self.right_dir]:
+            os.makedirs(d, exist_ok=True)
         
         #Initialize channel means CSV
         with open(self.output_file, mode='w', newline='') as file:
@@ -220,7 +237,7 @@ class nav_cloning_node:
             #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
             #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {delete_model_script_path }'], shell=False)#別のターミナルで実行する
                 #ここからの３行がいつも使うスポーンモデル(2025/2/6記入)
-        if self.episode == 6000:
+        if self.episode == 500:
             spawn_model_script_path = '/home/ciel/catkin_ws/src/nav_cloning/model_script/my_cylinder/spawn_model.py'
             subprocess.run(['python3', spawn_model_script_path])
             
@@ -348,6 +365,15 @@ class nav_cloning_node:
             # end mode
 
             print(str(self.episode) + ", training, loss: " + str(loss) + ", angle_error: " + str(angle_error) + ", distance: " + str(distance))
+            # === ここに画像保存機能を追加！ ===
+            if self.episode % self.save_interval == 0:
+            # 各カメラ画像を保存
+                cv2.imwrite(os.path.join(self.front_dir, f"front_{self.episode}.png"), self.cv_image)
+                cv2.imwrite(os.path.join(self.left_dir, f"left_{self.episode}.png"), self.cv_left_image)
+                cv2.imwrite(os.path.join(self.right_dir, f"right_{self.episode}.png"), self.cv_right_image)
+
+    # ===============================
+    
             self.episode += 1
             line = [str(self.episode), "training", str(loss), str(angle_error), str(distance), str(self.pos_x), str(self.pos_y), str(self.pos_the)]
             with open(self.path + self.start_time + '/' + 'training.csv', 'a') as f:#学習時のデータ保存場所の指定

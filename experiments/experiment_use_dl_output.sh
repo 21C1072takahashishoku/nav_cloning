@@ -1,3 +1,4 @@
+#for i in `seq 10`
 for i in `seq 10`
 do
   roslaunch nav_cloning nav_cloning_sim.launch mode:=use_dl_output

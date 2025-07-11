@@ -21,13 +21,13 @@
       <visual name='visual'>
         <geometry>
           <cylinder>
-            <radius>0.5</radius>
+            <radius>1</radius>
             <length>1</length>
           </cylinder>
         </geometry>
         <material>
           <script>
-            <name>Gazebo/Yellow</name>
+            <name>Gazebo/Blue</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
           <shader type='pixel'/>

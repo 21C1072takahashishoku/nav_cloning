@@ -14,7 +14,7 @@ import os
 
 def draw_training_pos():
     rospy.init_node('draw_training_pos_node', anonymous=True)
-    path = '/home/ciel/catkin_ws/src/nav_cloning/data/卒論データ/step8500/willow_garage/通常ガレージ/障害物配置/自己発光/0,0,1/'
+    path = '/home/ciel/catkin_ws/src/nav_cloning/data/修論データ/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
     #image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/map.png').convert("L")#willowgarage
     image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/cit_3f_map.pgm').convert("L")#津田沼２号館３階
     arr = np.asarray(image)

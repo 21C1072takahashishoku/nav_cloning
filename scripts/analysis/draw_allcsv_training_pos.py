@@ -14,7 +14,7 @@ import os
 
 def draw_training_pos():
     rospy.init_node('draw_training_pos_node', anonymous=True)
-    path = '/home/ciel/catkin_ws/src/nav_cloning/data/卒論データ/step8500/willow_garage/白廊下＆黒ガレージ/1,1,1/'
+    path = '//home/ciel/catkin_ws/src/nav_cloning/data/修論データ/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
     image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/map.png').convert("L")#willowgarage
     arr = np.asarray(image)
     fig = pyplot.figure()
@@ -31,13 +31,14 @@ def draw_training_pos():
                     continue
                 str_step, str_mode, str_loss, str_angle_error, str_distance, str_x, str_y, str_the = row
                 x, y, the = float(str_x), float(str_y), float(str_the)
-                
-                if 6000 <= i <= 6000:
+                if 5800<= i <= 6261 and i % 10 == 0:
+                    patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
+                elif 6261 <= i <= 6261:
                     patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
-                elif 6001 <= i <= 8499:
+                elif 6262 <= i <= 8499:
                     patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
                 elif 8500 <= i <= 8500:
-                    patch = Circle(xy=(x, y), radius=0.1, facecolor="blue")
+                    patch = Circle(xy=(x, y), radius=0.03, facecolor="blue")
                 else:
                     continue
                 ax.add_patch(patch)
@@ -51,8 +52,8 @@ def draw_training_pos():
     #ここまで
     ax.set_xlim([-5, 30])#x軸の表示範囲
     ax.set_ylim([-5, 15])#y軸の表示範囲    
-    #ax.set_xlim([-20, 30])#x軸の表示範囲(もとの数値)ax.set_xlim([-5, 30])
-    #ax.set_ylim([-20, 15])#y軸の表示範囲(もとの数値)ax.set_ylim([-5, 15])
+    #ax.set_xlim([-10, 55])#x軸の表示範囲(もとの数値)ax.set_xlim([-5, 30])
+    #ax.set_ylim([-5, 50])#y軸の表示範囲(もとの数値)ax.set_ylim([-5, 15])
 
     pyplot.show()
 
