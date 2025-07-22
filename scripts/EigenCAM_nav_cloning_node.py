@@ -25,6 +25,7 @@ import time
 import copy
 import sys
 import tf
+import subprocess #追加
 from nav_msgs.msg import Odometry
 
 class nav_cloning_node:
@@ -55,8 +56,8 @@ class nav_cloning_node:
         self.learning = True
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
-        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_with_dir_'+str(self.mode)+'/'
-        self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_with_dir_'+str(self.mode)+'/'
+        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_with_dir_'+str(self.mode)+'/'#csvの保存先
+        self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_with_dir_'+str(self.mode)+'/'#ptの保存先
         self.load_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/normal_10000_model_'+str(self.mode)+'/20250318_12:06:01/model_gpu.pt'
         self.previous_reset_time = 0
         self.pos_x = 0.0
@@ -153,21 +154,38 @@ class nav_cloning_node:
         #r, g, b = cv2.split(img_right)
         #img_right = np.asanyarray([r,g,b])
         ros_time = str(rospy.Time.now())
+##ここからもとのプログラム
+        # if self.episode == 0:
+        #     self.learning = False
+        #     #self.dl.save(self.save_path)
+        #     self.dl.load(self.load_path)
 
-        if self.episode == 0:
-            self.learning = False
-            #self.dl.save(self.save_path)
-            self.dl.load(self.load_path)
+        # if self.episode == 60000:
+        #     self.learning = False
+        #     self.dl.save(self.save_path)
+        #     #self.dl.load(self.load_path)
 
-        if self.episode == 60000:
+        # if self.episode == 2000:
+        #     self.dl.save_cam_video()
+        #     os.system('killall roslaunch')
+        #     sys.exit()
+##ここまで
+        # --- モデル生成 ---ここから自作
+        if self.episode == 6000:
+            spawn_model_script_path = '/home/ciel/catkin_ws/src/nav_cloning/model_script/my_cylinder/spawn_model.py'
+            subprocess.run(['python3', spawn_model_script_path])
+
+        # --- 学習終了＆モデル保存 ---
+        if self.episode == 6262:
             self.learning = False
             self.dl.save(self.save_path)
-            #self.dl.load(self.load_path)
 
-        if self.episode == 2000:
-            self.dl.save_cam_video()
+        # --- 終了処理＆CAM動画保存 ---
+        if self.episode == 8500:
+            self.dl.save_cam_video()  # ← CAM動画保存を追加
             os.system('killall roslaunch')
             sys.exit()
+##ここまで自作
 
         if self.learning:
             target_action = self.action
@@ -264,7 +282,7 @@ class nav_cloning_node:
             self.vel.linear.x = 0.2
             self.vel.angular.z = target_action
             self.nav_pub.publish(self.vel)
-
+#もとのプログラム
         temp = copy.deepcopy(img)
         cv2.imshow("Resized Image", temp)
         temp = copy.deepcopy(img_left)
@@ -272,6 +290,24 @@ class nav_cloning_node:
         temp = copy.deepcopy(img_right)
         cv2.imshow("Resized Right Image", temp)
         cv2.waitKey(1)
+
+
+# #ここからオリジナル
+#         # --- 表示用（視認性のためリサイズ）---
+#         resized_img = cv2.resize(img, (128*2, 96*2))
+#         cv2.imshow("Resized Image", resized_img)
+#         cv2.moveWindow("Resized Image", 457, 150)
+
+#         resized_img_left = cv2.resize(img_left, (128*2, 96*2))
+#         cv2.imshow("Resized Left Image", resized_img_left)
+#         cv2.moveWindow("Resized Left Image", 200, 150)
+
+#         resized_img_right = cv2.resize(img_right, (128*2, 96*2))
+#         cv2.imshow("Resized Right Image", resized_img_right)
+#         cv2.moveWindow("Resized Right Image", 714, 150)
+# cv2.waitKey(1)
+#ここまで
+
 
 if __name__ == '__main__':
     rg = nav_cloning_node()
