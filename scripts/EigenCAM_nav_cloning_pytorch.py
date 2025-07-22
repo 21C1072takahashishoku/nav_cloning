@@ -151,6 +151,11 @@ class deep_learning:
         x = torch.tensor(img,dtype =torch.float32, device=self.device).unsqueeze(0)
         x=x.permute(0,3,1,2)
         action_value_training = self.net(x)
+        # 🔽 追加：学習中のCAM記録
+        # self.visualize_cam(img, save_path=f"{self.cam_dir}/frame_{self.count:06d}.jpg")
+        # self.count += 1
+        #ここまで
+
         return action_value_training[0][0].item(), loss
 
     def act(self, img):
