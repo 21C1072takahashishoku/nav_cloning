@@ -1,0 +1,362 @@
+[33mcommit cc19b0bde607bf2665ae3e85b23c30a7b34207d0[m[33m ([m[1;36mHEAD -> [m[1;32meigen_cam[m[33m)[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Tue Jul 15 01:58:42 2025 +0900
+
+    add_eigenfile
+
+[33mcommit 60cb312b348bec40d4147e327431b048ace6eeac[m[33m ([m[1;33mtag: release2025_07_12[m[33m, [m[1;32mmaster[m[33m)[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Sat Jul 12 06:08:12 2025 +0900
+
+    experiments,launch動作確認済み
+
+[33mcommit 9ec205d7447bc380b924a005b8e9377500ad3f6a[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Tue Jan 28 01:54:27 2025 +0900
+
+    修正
+
+[33mcommit f1af59f77d4b14f68a30cc9fde990cc17c2c6f19[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Mon Jan 27 18:38:54 2025 +0900
+
+    環境修正
+
+[33mcommit 2e4e4e88037ea353f4d5cff848bc2b52c4e95c7e[m
+Merge: e8123b7 7708ec1
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Sun Dec 1 00:42:38 2024 +0900
+
+    タートルぼっと動かなくなったから揚げる
+
+[33mcommit e8123b78977dd706986d68135d4077ee64f72883[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Sun Dec 1 00:41:06 2024 +0900
+
+    タートルぼっと動かなくなったから揚げる
+
+[33mcommit 7708ec1d40aa1fa7033accb2c6659e4537e1d56a[m
+Author: syokku-iroiro <abc123zzzyyy@gmail.com>
+Date:   Thu May 2 19:29:37 2024 +0900
+
+    backup nav_data
+
+[33mcommit 2ccfd9deb32732b81c7088b42187e6ce0882e482[m
+Author: YusukeKiyooka <s17c1045kh@s.chibakoudai.jp>
+Date:   Tue Apr 26 16:48:07 2022 +0900
+
+    rename
+
+[33mcommit 99672133e8f1ab3e6b25791a94b045fb2ba05078[m
+Author: YusukeKiyooka <s17c1045kh@s.chibakoudai.jp>
+Date:   Fri Mar 4 18:30:28 2022 +0900
+
+    Create code for analysis
+
+[33mcommit 1c9527d061d00282bf83b91193e909cd18fa6fc6[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Feb 19 22:56:34 2022 +0900
+
+    fix map
+
+[33mcommit ed18f3d49de0785843695c2db4c413b337052eb1[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Fri Feb 18 18:01:38 2022 +0900
+
+    change cit3f path
+
+[33mcommit 52e83c981f7c46ccb106de77d3bc0ac426077e70[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Wed Feb 16 08:54:02 2022 +0900
+
+    initpose.cpp
+
+[33mcommit 75a06c3168522636982bc9a257342c2f36528a49[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Feb 15 19:37:03 2022 +0900
+
+    waypoint_nav
+
+[33mcommit b5315f3877839d21d059b9b3fd79511a20d25b27[m
+Merge: 1ac3c16 67a0471
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Feb 15 18:46:33 2022 +0900
+
+    Merge pull request #11 from open-rdc/add_experimental_environment
+    
+    add experimental environment
+
+[33mcommit 67a0471dc5a7be7209ac9b0bd6d1c83b72f80f8e[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Feb 15 18:43:22 2022 +0900
+
+    add experimental environment
+
+[33mcommit 1ac3c16ab84e1cdf272415212228ca891f2bbbe1[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 15:01:16 2022 +0900
+
+    Update README.md
+
+[33mcommit 8c316e3967b0cfe12c6baf49d18cdeff19038131[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 13:45:45 2022 +0900
+
+    Update README.md
+
+[33mcommit d7cb688ed3cbb682edadd436aba2a8a34e064e7f[m
+Merge: 786c2e3 1649cdf
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 13:34:50 2022 +0900
+
+    Merge pull request #10 from open-rdc/devel/add_selected_training
+    
+    add nav_cloning_with_direction
+
+[33mcommit 1649cdffc32d146ca8514f6cd3f7ffd6159d7ae0[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 13:25:14 2022 +0900
+
+    modify use_initpose
+
+[33mcommit 78cf4bae1f6c1ce9478ddc19dac153c3de746f65[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 13:11:02 2022 +0900
+
+    add initpose
+
+[33mcommit 321ee0b2217a644c1c15e66e5b0a9c06ef19ea44[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 12:04:38 2022 +0900
+
+    add selected training
+
+[33mcommit 4b5ab4399fd21a7782fcf63be0b6d5fc636f4304[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Feb 13 11:08:27 2022 +0900
+
+    stable version
+
+[33mcommit c2ad8f532c3c19fa1e8960302c2aa1be605ca0d1[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Feb 12 23:08:45 2022 +0900
+
+    cross load
+
+[33mcommit 4a6eb43c9634c798cd929c0f72a8eb712b53d06b[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Feb 12 12:12:12 2022 +0900
+
+    able to execute
+
+[33mcommit 2aa31f2f9da40b3210dfc28875b635dc3dc9aa74[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Feb 12 08:43:39 2022 +0900
+
+    add selected_training
+
+[33mcommit 786c2e37ef6784f4fb3019490620bb52b016bce1[m
+Merge: 1e6ae67 cc34deb
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Nov 13 18:10:27 2021 +0900
+
+    Merge pull request #9 from open-rdc/modify_traceable_area
+    
+    経路追従可能領域の計算の変更
+
+[33mcommit cc34debf48ff6f84eb15b156ad233bc5ac23db39[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Oct 17 19:34:21 2021 +0900
+
+    add calc_traceable_histogram.py
+
+[33mcommit 1e6ae67daef8fc16bf76b8aa50968430fe02e61c[m
+Merge: 4f0fa85 f32528e
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Oct 16 06:39:05 2021 +0900
+
+    Merge pull request #1 from open-rdc/develop/auto_experiment
+    
+    Develop/auto experiment
+
+[33mcommit f32528e4916edb0dfbcd7734c48347e95611dee6[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Wed Oct 6 04:41:15 2021 +0900
+
+    fix calc_traceable_pos
+
+[33mcommit 85a5de967ca72fbe6575b9db270ebbf19cc6b191[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Oct 5 20:29:20 2021 +0900
+
+    add calc_traceable_histogram.py
+
+[33mcommit 02d5febf9bcd1b2388446bafc8950006ec06c468[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Oct 5 19:34:35 2021 +0900
+
+    adjust timing
+
+[33mcommit 8230a8c2734d17e78f19e769bb699b9a1bc7d534[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Oct 5 18:48:05 2021 +0900
+
+    add traceable_pos
+
+[33mcommit d4f5801dee00c69e05d3de645ea3e3e1be44e1d5[m
+Merge: b40989d 3cd32de
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Oct 5 09:17:54 2021 +0900
+
+    Merge pull request #7 from open-rdc/data_analysis
+    
+    play old modes
+
+[33mcommit 3cd32de46939a19d56a168d994cf7a7b37b91ad8[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Oct 5 09:14:02 2021 +0900
+
+    play old modes
+
+[33mcommit b40989d79b75481d3309aeb7d0a3fd4b80e174f1[m
+Merge: bd60059 28301a1
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Oct 4 09:41:52 2021 +0900
+
+    Merge pull request #5 from open-rdc/data_analysis
+    
+    add calc_histogram
+
+[33mcommit 28301a154bd411ad37cdef4bf04bbf761c38b515[m
+Merge: 31d2abd bd60059
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Oct 4 09:39:55 2021 +0900
+
+    merge develop/auto_experiment
+
+[33mcommit 31d2abd3b3bd90a401ac18eb1cbcc664d91115ea[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Oct 4 09:15:22 2021 +0900
+
+    add calc_histogram
+
+[33mcommit 4f0fa853002bee1eb8f505bdff4b5fcc81e337e7[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Oct 3 12:32:25 2021 +0900
+
+    Update README.md
+
+[33mcommit bd60059c38e9bb9b0e714ec5871fa4dc68cc2daa[m
+Merge: 3b018c8 59586f1
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Oct 3 12:21:30 2021 +0900
+
+    Merge pull request #2 from open-rdc/data_analysis
+    
+    Data analysis
+
+[33mcommit 59586f1c501062ca4486642b6ee69ad5f1f7fe24[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Oct 3 12:14:39 2021 +0900
+
+    add draw_arc.py
+
+[33mcommit c99ffed7d35cdb96f8cf86f4130e7c6553abb6cb[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sun Oct 3 07:06:39 2021 +0900
+
+    add map
+
+[33mcommit 55b3d8b6d385e9156cdb340c3a438028bd58b166[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Sat Oct 2 20:49:53 2021 +0900
+
+    analyze model
+
+[33mcommit 210cf785bdb2c780c00ced950970199fd00f10d8[m
+Merge: 857d762 f4d86b7
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 12 14:52:42 2021 +0900
+
+    Merge remote-tracking branch 'origin/develop/selected_training'
+
+[33mcommit 3b018c805e106c93be8da2d8d561304783a0f844[m
+Merge: 741bb06 f4d86b7
+Author: MasayaOkada <40891598+MasayaOkada@users.noreply.github.com>
+Date:   Sun Sep 12 14:29:27 2021 +0900
+
+    Merge pull request #3 from open-rdc/develop/selected_training
+    
+    add selected_training
+
+[33mcommit 7623e5e1b19fd3ca214bdf5aa3de2b91223ebb4c[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Sep 7 10:03:34 2021 +0900
+
+    analysis
+
+[33mcommit f4d86b73947627860f5cab30dca01bef12ebc153[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Tue Sep 7 01:50:58 2021 +0900
+
+    add selected_training
+
+[33mcommit 187377ca2d5ff0f4c43a9de6c4ea129673513230[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Sep 6 09:24:52 2021 +0900
+
+    add path_collector.py
+
+[33mcommit 741bb060170e7caf0a22ee65a6568faee421ef86[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Sep 6 06:36:53 2021 +0900
+
+    add shell scripts
+
+[33mcommit df937e7d3c887c6cd597f0e00e9cdda0ec7fd66e[m
+Author: Yasuo Hayashibara <yasuo.hayashibara@it-chiba.ac.jp>
+Date:   Mon Sep 6 06:33:59 2021 +0900
+
+    auto experiment
+
+[33mcommit 857d762adf9b8f6f90b3ebefcf8557cb8f51cff6[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Mon Sep 6 00:37:06 2021 +0900
+
+    fix dockerfile
+
+[33mcommit 0d27a85c0ef6f34be038f120dd7bce2a458cefa2[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 18:47:21 2021 +0900
+
+    use angle diff
+
+[33mcommit 72a66e2d5d2b8a32f071f8a528da4db956be798a[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 18:46:42 2021 +0900
+
+    proposed method old
+
+[33mcommit 11114f7d6002aa13a18701356870c536fb839ad3[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 18:32:45 2021 +0900
+
+    fix link
+
+[33mcommit 4f6369bbc6ca9eb9b94e24f0e7cfcf71dd6f8190[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 18:31:52 2021 +0900
+
+    add running sim
+
+[33mcommit ba596d31322e0a0b517fd4c26964d3681d51c3a4[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 18:10:48 2021 +0900
+
+    add rviz plugin
+
+[33mcommit d92e99262b0238ab5d5def55b3938e531eec8fb8[m
+Author: MasayaOkada <masa.okd888@gmail.com>
+Date:   Sun Sep 5 17:55:37 2021 +0900
+
+    initial commit

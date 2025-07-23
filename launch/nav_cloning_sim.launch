@@ -2,15 +2,15 @@
 <launch>
   <!--<arg name="script" default="nav_cloning_node.py"/>-->
   <!--<arg name="script" default="nav_cloning_centerimage_node.py"/>--><!--中央カメラの画像を保存する処理を追加-->
-  <arg name="script" default="nav_cloning_centerimage_node.py"/>
+  <arg name="script" default="EigenCAM_nav_cloning_node.py"/><!--可視化追加--><!--2025_7_22動いた-->
   <arg name="mode" default="use_dl_output"/>
   <!--<arg name="world_name" default="willow_garage.world"/>-->
   <!--<arg name="world_name" default="2willow_garage.world"/>--><!--2025_0521通常ガレージ(黒廊下＆白壁)-->
   <!--<arg name="world_name" default="willow_garage_number.world"/>--><!--廊下のみ色変化-->
   <!--<arg name="world_name" default="color_garage.world"/>-->
-  <!--<arg name="world_name" default="shading.world"/>--><!--これ使う2025_4_22-->
+  <!--<arg name="world_name" default="shading.world"/>--><!--色変化環境これ使う2025_7_16-->
   <!--<arg name="world_name" default="willow_garage_true.world"/>--><!--通常ガレージ-->
-  <arg name="world_name" default="shading.world"/>
+  <arg name="world_name" default="2willow_garage.world"/>
   <arg name="map_file" default="willowgarage.yaml"/>
   <arg name="waypoints_file" default="willow_loop_waypoint_nav.yaml"/>
   <arg name="dist_err" default="0.8"/>

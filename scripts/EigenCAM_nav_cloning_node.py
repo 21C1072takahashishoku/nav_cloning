@@ -56,8 +56,11 @@ class nav_cloning_node:
         self.learning = True
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
-        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/result_with_dir_'+str(self.mode)+'/'#csvの保存先
-        self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/model_with_dir_'+str(self.mode)+'/'#ptの保存先
+        self.path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/修論データ/6262/可視化/通常ガレージ/0,0,0/csv/'#csvの保存先
+        self.save_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/修論データ/6262/可視化/通常ガレージ/0,0,0/model/'#ptの保存先
+        # ディレクトリが存在しない場合は作成する
+        os.makedirs(self.path, exist_ok=True)
+        os.makedirs(self.save_path, exist_ok=True)
         self.load_path = roslib.packages.get_pkg_dir('nav_cloning') + '/data/normal_10000_model_'+str(self.mode)+'/20250318_12:06:01/model_gpu.pt'
         self.previous_reset_time = 0
         self.pos_x = 0.0

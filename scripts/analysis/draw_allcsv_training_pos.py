@@ -14,7 +14,7 @@ import os
 
 def draw_training_pos():
     rospy.init_node('draw_training_pos_node', anonymous=True)
-    path = '//home/ciel/catkin_ws/src/nav_cloning/data/修論データ/6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
+    path = '/home/ciel/catkin_ws/src/nav_cloning/data/修論データ/6262/可視化/通常ガレージ/0,0,0/csv/前失敗/'
     image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/map.png').convert("L")#willowgarage
     arr = np.asarray(image)
     fig = pyplot.figure()
@@ -38,7 +38,7 @@ def draw_training_pos():
                 elif 6262 <= i <= 8499:
                     patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
                 elif 8500 <= i <= 8500:
-                    patch = Circle(xy=(x, y), radius=0.03, facecolor="blue")
+                    patch = Circle(xy=(x, y), radius=0.3, facecolor="blue")
                 else:
                     continue
                 ax.add_patch(patch)

@@ -38,7 +38,7 @@ def draw_training_pos():
                 patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
             #elif 6261 <= i <= 6261:
                 #patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
-            elif 6262 <= i <= 8400:
+            elif 6262 <= i <= 8500:
                 patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
             #elif 8400 <= i <= 8500:
                 #patch = Circle(xy=(x, y), radius=0.3, facecolor="blue")

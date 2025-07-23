@@ -26,8 +26,8 @@
         </geometry>
         <material>
           <!-- 環境光のみを使用し、拡散反射を最小限に -->
-          <ambient> 1 1 0 1</ambient>
-          <diffuse> 1 1 0 1</diffuse>
+          <ambient> 0 0 0 1</ambient>
+          <diffuse> 0 0 0 1</diffuse>
         </material>
         <pose>0 0 0 0 -0 0</pose>
         <transparency>0</transparency>
