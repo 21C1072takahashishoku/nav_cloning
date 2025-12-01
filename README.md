@@ -88,7 +88,7 @@ https://github.com/open-rdc/nav_cloning/wiki
 
 
 
-# nav_cloning
+# nav_cloning_4channeldrive
 
 ROS (Noetic) 上で動作する、自律移動ロボット向け **視覚ベース経路追従・未知障害物回避** パッケージです。
 
