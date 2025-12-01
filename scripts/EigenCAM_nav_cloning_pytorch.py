@@ -102,8 +102,8 @@ class deep_learning:
         # CAM動画保存用
         #self.cam_dir = "/home/shuma/catkin_ws/src/nav_cloning/eigen/normal_network_frames/" + time.strftime("%Y%m%d_%H:%M:%S")
         #self.cam_video_dir = "/home/shuma/catkin_ws/src/nav_cloning/eigen/normal_network_videos/"+ time.strftime("%Y%m%d_%H:%M:%S")
-        self.cam_dir = roslib.packages.get_pkg_dir('nav_cloning') + "/eigen/normal_network_frames/" + time.strftime("%Y%m%d_%H:%M:%S")
-        self.cam_video_dir = roslib.packages.get_pkg_dir('nav_cloning') + "/eigen/normal_network_videos/"+ time.strftime("%Y%m%d_%H:%M:%S")
+        self.cam_dir = roslib.packages.get_pkg_dir('nav_cloning') + "/data/修論データ/6262/可視化/通常ガレージ/0,0,0/前失敗/固定障害物２/" + time.strftime("%Y%m%d_%H:%M:%S")
+        self.cam_video_dir = roslib.packages.get_pkg_dir('nav_cloning') + "/data/修論データ/6262/可視化/通常ガレージ/0,0,0/前失敗/固定障害物２/"+ time.strftime("%Y%m%d_%H:%M:%S")
         os.makedirs(self.cam_dir, exist_ok=True)
         os.makedirs(self.cam_video_dir, exist_ok=True)
 

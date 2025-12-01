@@ -63,12 +63,13 @@ class nav_cloning_node:
         self.select_dl = False
         self.start_time = time.strftime("%Y%m%d_%H:%M:%S")
         # 共通のベースパス
-        base_subpath = '6262/環境光変化/1(投稿データ)/青廊下＆赤ガレージ/障害物配置/自己発光/0,0,0/'
+        base_frontpath = 'data/修論データ'
+        base_backpath = '6262/白廊下黒ガレ(shading)/障害物配置/0,0,0'
 	# 各ディレクトリ
-        self.path = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/', base_subpath) #ノーマルデータ
-        self.output_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/チャンネルファイル/', base_subpath) #チャンネルデータ
+        self.path = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'),base_frontpath,  base_backpath) #ノーマルデータ
+        self.output_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), base_frontpath, 'チャンネルファイル', base_backpath) #チャンネルデータ
     # カメラごとのディレクトリパスを作成
-        camera_base_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), 'data/修論データ/カメラ画像', base_subpath)
+        camera_base_dir = os.path.join(roslib.packages.get_pkg_dir('nav_cloning'), base_frontpath, 'カメラ画像', base_backpath)
 
         self.front_dir = os.path.join(camera_base_dir, 'front')
         self.left_dir = os.path.join(camera_base_dir, 'left')
@@ -237,14 +238,11 @@ class nav_cloning_node:
             #delete_model_script_path = '/home/ciero/catkin_ws/src/my_models/my_cylinder/delete_model.py'
             #subprocess.Popen(['gnome-terminal', '--', 'bash', '-c', f'python3 {delete_model_script_path }'], shell=False)#別のターミナルで実行する
                 #ここからの３行がいつも使うスポーンモデル(2025/2/6記入)
-        if self.episode == 500:
+        if self.episode == 6100:
             spawn_model_script_path = '/home/ciel/catkin_ws/src/nav_cloning/model_script/my_cylinder/spawn_model.py'
             subprocess.run(['python3', spawn_model_script_path])
             
-        if self.episode == 6262:
-        #if self.episode == 8000:
-        #if self.episode == 3750:#３週と障害物配置部屋の直前
-        #if self.episode == 2666:#durationを0.3にしたときの同じ距離進むステップ数(0.2に対して）
+        if self.episode == 6000: #6262から変更
             self.learning = False
             self.dl.save(self.save_path)
             
@@ -286,10 +284,7 @@ class nav_cloning_node:
             #subprocess.run(['python3', move_model_script_path])
         #end
         
-        
-                        
 
-        #if self.episode == 6000:
         if self.episode == 8500:
             #os.system('pkill -f moving_color_date.py')
 
@@ -414,22 +409,35 @@ class nav_cloning_node:
         #cv2.imshow("Resized Right Image", temp)
         #add
         
-        # 正面の画像をリサイズ
-        resized_img = cv2.resize(img, (128*2, 96*2))
-        cv2.imshow("Resized Image", resized_img)
-        cv2.moveWindow("Resized Image", 457, 150)  # 左上 (x=0, y=0)
+        # --- 画像表示 (GUI) ---
+        disp_img = cv2.merge((imgobj[2], imgobj[1], imgobj[0]))
+        disp_left = cv2.merge((imgobj_left[2], imgobj_left[1], imgobj_left[0]))
+        disp_right = cv2.merge((imgobj_right[2], imgobj_right[1], imgobj_right[0]))
 
-        # 左カメラの画像をリサイズ
-        resized_img_left = cv2.resize(img_left, (128*2, 96*2))
+        # ★変更点: ここでサイズを小さく (128, 96) に固定し、ウィンドウサイズも強制変更
+        display_size = (128*2, 96*2)
+
+        # 左RGB
+        resized_img_left = cv2.resize(disp_left, display_size)
+        cv2.namedWindow("Resized Left Image", cv2.WINDOW_GUI_NORMAL)
+        cv2.resizeWindow("Resized Left Image", display_size[0], display_size[1]) # 強制リサイズ
         cv2.imshow("Resized Left Image", resized_img_left)
-        cv2.moveWindow("Resized Left Image", 200, 150)  # 右側に配置 (x=650, y=0)
+        cv2.moveWindow("Resized Left Image", 100, 70)
+
+        # 中央RGB
+        resized_img = cv2.resize(disp_img, display_size)
+        cv2.namedWindow("Resized Image", cv2.WINDOW_GUI_NORMAL)
+        cv2.resizeWindow("Resized Image", display_size[0], display_size[1]) # 強制リサイズ
+        cv2.imshow("Resized Image", resized_img)
+        cv2.moveWindow("Resized Image", 360, 70)
         
-        # 右カメラの画像をリサイズ
-        resized_img_right = cv2.resize(img_right, (128*2, 96*2))
+        # 右RGB
+        resized_img_right = cv2.resize(disp_right, display_size)
+        cv2.namedWindow("Resized Right Image", cv2.WINDOW_GUI_NORMAL)
+        cv2.resizeWindow("Resized Right Image", display_size[0], display_size[1]) # 強制リサイズ
         cv2.imshow("Resized Right Image", resized_img_right)
-        cv2.moveWindow("Resized Right Image", 714, 150)  # さらに右 (x=1300, y=0)
-        
-        #end
+        cv2.moveWindow("Resized Right Image", 620, 70)
+
 
         cv2.waitKey(1)
 

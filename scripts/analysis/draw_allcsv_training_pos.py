@@ -14,15 +14,20 @@ import os
 
 def draw_training_pos():
     rospy.init_node('draw_training_pos_node', anonymous=True)
-    path = '/home/ciel/catkin_ws/src/nav_cloning/data/修論データ/6262/可視化/通常ガレージ/0,0,0/csv/前失敗/'
+    path = '/home/ciel/catkin_ws/src/nav_cloning/data/修論データ/4chdrive/白環境黒ガレージ/障害物配置/0,0,0'
     image = Image.open(roslib.packages.get_pkg_dir('nav_cloning')+'/maps/map.png').convert("L")#willowgarage
     arr = np.asarray(image)
     fig = pyplot.figure()
     ax = fig.add_subplot(111)
     ax.imshow(arr, cmap='gray', extent=[-10,50,-10,50])
+    csv_files = find_csv_files(path)
+    print(f"見つかったCSVファイル数: {len(csv_files)}")
+    for f in csv_files:
+        print(f)
+
     
     # 再帰的にフォルダを探索し、CSVファイルを見つける関数を呼び出す
-    for csv_file in find_csv_files(path):
+    for csv_file in csv_files:
         with open(csv_file, 'r') as f:
             is_first = True
             for i, row in enumerate(csv.reader(f)):
@@ -32,13 +37,15 @@ def draw_training_pos():
                 str_step, str_mode, str_loss, str_angle_error, str_distance, str_x, str_y, str_the = row
                 x, y, the = float(str_x), float(str_y), float(str_the)
                 if 5800<= i <= 6261 and i % 10 == 0:
-                    patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
+                     patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
                 elif 6261 <= i <= 6261:
-                    patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
+                     patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
                 elif 6262 <= i <= 8499:
-                    patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
+                     patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
                 elif 8500 <= i <= 8500:
-                    patch = Circle(xy=(x, y), radius=0.3, facecolor="blue")
+                     patch = Circle(xy=(x, y), radius=0.3, facecolor="blue")
+                #if 0< i:
+                    #patch = Circle(xy=(x, y), radius=0.03, facecolor="red")
                 else:
                     continue
                 ax.add_patch(patch)

@@ -2,7 +2,9 @@
 <launch>
   <!--<arg name="script" default="nav_cloning_node.py"/>-->
   <!--<arg name="script" default="nav_cloning_centerimage_node.py"/>--><!--中央カメラの画像を保存する処理を追加-->
-  <arg name="script" default="EigenCAM_nav_cloning_node.py"/><!--可視化追加--><!--2025_7_22動いた-->
+  <!--<arg name="script" default="EigenCAM_nav_cloning_node.py"/>--><!--可視化追加--><!--2025_7_22動いた-->
+  <!--<arg name="script" default="nav_cloning_afterlearning_node.py"/>--><!--推論のみ-->
+  <arg name="script" default="nav_cloning_centerimage_node.py"/>
   <arg name="mode" default="use_dl_output"/>
   <!--<arg name="world_name" default="willow_garage.world"/>-->
   <!--<arg name="world_name" default="2willow_garage.world"/>--><!--2025_0521通常ガレージ(黒廊下＆白壁)-->
@@ -10,7 +12,7 @@
   <!--<arg name="world_name" default="color_garage.world"/>-->
   <!--<arg name="world_name" default="shading.world"/>--><!--色変化環境これ使う2025_7_16-->
   <!--<arg name="world_name" default="willow_garage_true.world"/>--><!--通常ガレージ-->
-  <arg name="world_name" default="2willow_garage.world"/>
+  <arg name="world_name" default="shading.world"/>
   <arg name="map_file" default="willowgarage.yaml"/>
   <arg name="waypoints_file" default="willow_loop_waypoint_nav.yaml"/>
   <arg name="dist_err" default="0.8"/>
@@ -34,6 +36,16 @@
   </include>
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_waffle_pi.urdf.xacro" />
+
+  <!--追加-->
+  <!-- robot_state_publisher を起動するか制御する引数 -->
+  <arg name="use_robot_state_publisher" default="true"/>
+
+  <!-- 明示的に robot_state_publisher を起動 
+  <group if="$(arg use_robot_state_publisher)">
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+  </group>
+  ここまで -->
 
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model mobile_base -x $(arg robot_x) -y $(arg robot_y) -z 0.0 -Y $(arg robot_Y) -param robot_description" />
   <group if="$(arg use_initpose)">

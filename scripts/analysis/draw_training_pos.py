@@ -32,10 +32,10 @@ def draw_training_pos():
             str_step, str_mode, str_loss, str_angle_error, str_distance, str_x, str_y, str_the = row
             x, y, the = float(str_x), float(str_y), float(str_the)
 
-            #if 0<= i <= 1700:
-                #patch = Circle(xy=(x, y), radius=0.03, facecolor="black")
-            if 40<= i <= 1570 and i % 10 == 0:
-                patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
+            if 0<= i <= 6261:
+                patch = Circle(xy=(x, y), radius=0.03, facecolor="black")
+            #if 40<= i <= 1570 and i % 10 == 0:
+                #patch = Circle(xy=(x, y), radius=0.08, facecolor="black")
             #elif 6261 <= i <= 6261:
                 #patch = Circle(xy=(x, y), radius=0.3, facecolor="black")
             elif 6262 <= i <= 8500:

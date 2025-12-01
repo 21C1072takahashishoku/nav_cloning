@@ -60,8 +60,9 @@
             </plane>
           </geometry>
           <material>
-            <ambient>1 0 0 1</ambient> <!-- 廊下を黄色に設定 -->
-            <diffuse>1 0 0 1</diffuse>
+         <!-- 壁の色 -->
+            <ambient>0 0 0 1</ambient> <!-- 廊下を黄色に設定 -->
+            <diffuse>0 0 0 1</diffuse>
           </material>
         </visual>
         <self_collide>0</self_collide>
@@ -103,8 +104,8 @@
           <cast_shadows>0</cast_shadows>
           <material>
           <!-- 壁の色 -->
-            <ambient> 0 0 1 1</ambient> <!-- 環境光反射 (赤) -->
-            <diffuse> 0 0 1 1</diffuse> <!-- 拡散反射 (赤) -->
+            <ambient> 1 1 1 1</ambient> <!-- 環境光反射 (赤) -->
+            <diffuse> 1 1 1 1</diffuse> <!-- 拡散反射 (赤) -->
           </material>
         </visual>
         <self_collide>0</self_collide>
